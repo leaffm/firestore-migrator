@@ -4,6 +4,7 @@ import * as _ from 'lodash';
 import * as csv from 'csvtojson';
 import { processFile as processXlsx } from 'excel-as-json';
 
+require('core-js');
 
 const db = admin.firestore();
 let batch = db.batch();
