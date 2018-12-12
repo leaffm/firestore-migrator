@@ -1,6 +1,7 @@
 import * as admin from 'firebase-admin';
 import * as fs from 'fs-extra';
 import * as _ from 'lodash';
+import { decodeDoc } from '../encoding';
 
 const db = admin.firestore();
 let args;
@@ -54,12 +55,15 @@ function getCollection(path): Promise<any> {
             // log if requested
             args.verbose && console.log(snap.ref.path);
 
+            // decodes document to make up for special field types
+            decodeDoc(doc[snap.id]);
+
             // process sub-collections
             if (args.subcolls) {
-                const subCollPaths = await snap.ref.getCollections().then(colls => colls.map(coll => coll.path));
+                const subCollPaths = await snap.ref.getCollections().then(colls => colls.map(coll => coll.path));                
                 if (subCollPaths.length) {
-                    const subCollections = await getCollections(subCollPaths);
-                    _.assign(doc, subCollections);
+                    const subCollections = await getCollections(subCollPaths);                    
+                    _.assign(doc[snap.id], subCollections);                                        
                 }
             }
 

@@ -3,6 +3,7 @@ import * as fs from 'fs-extra';
 import * as _ from 'lodash';
 import * as csv from 'csvtojson';
 import { processFile as processXlsx } from 'excel-as-json';
+import { encodeDoc } from '../encoding';
 
 require('core-js');
 
@@ -11,7 +12,6 @@ let batch = db.batch();
 let batchSetCount = 0;
 let totalSetCount = 0;
 let args;
-
 
 export const execute = async (file, collection, options) => {    
     args = options;
@@ -102,6 +102,9 @@ function writeCollection(data:JSON, path: string): Promise<any> {
                 await writeCollection(item[key], subPath);
                 delete item[key];
             }
+
+            // Encode item to Firestore
+            encodeDoc(item);
             
             // set document data into path/id
             const docRef = colRef.doc(id);

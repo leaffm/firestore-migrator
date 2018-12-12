@@ -1,8 +1,12 @@
 {
   "name": "firestoremigrate",
   "version": "1.0.0",
-  "description": "",
+  "description": "CLI tool for moving data in-n-out of Cloud Firestore",
   "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/leaffm/firestore-migrator.git"
+  },
   "scripts": {
     "build": "tsc && npm link",
     "migrate": "node dist/index.js"
@@ -13,18 +17,18 @@
     "@types/core-js": "^2.5.0",
     "@types/csvtojson": "^1.1.5",
     "@types/fs-extra": "^5.0.4",
-    "@types/lodash": "^4.14.112",
-    "@types/node": "^10.5.2",
-    "typescript": "^2.9.2"
+    "@types/lodash": "^4.14.119",
+    "@types/node": "^10.12.12",
+    "typescript": "^3.2.2"
   },
   "dependencies": {
-    "commander": "^2.16.0",
-    "core-js": "^2.5.7",
-    "csvtojson": "^1.1.9",
+    "commander": "^2.19.0",
+    "core-js": "^2.6.0",
+    "csvtojson": "^2.0.8",
     "excel-as-json": "^2.0.2",
-    "firebase-admin": "^5.13.0",
-    "fs-extra": "^7.0.0",
-    "lodash": "^4.17.10"
+    "firebase-admin": "^6.3.0",
+    "fs-extra": "^7.0.1",
+    "lodash": "^4.17.11"
   },
   "bin": {
     "fire-migrate": "dist/index.js"
